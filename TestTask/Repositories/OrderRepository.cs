@@ -18,7 +18,6 @@ namespace TestTask.Repositories
         //Renamed methods according requirements, because it didnt show the main idea of the methods
         public async Task<Order> GetOrderWithMaxTotalPrice()
         { 
-            //return await _context.Orders.OrderByDescending(order => order.Price * order.Quantity).FirstOrDefaultAsync();
             return await _context.Orders.OrderByDescending(order => order.Price * order.Quantity).FirstOrDefaultAsync();
         }
 
