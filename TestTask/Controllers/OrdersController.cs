@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TestTask.Exceptions;
+using TestTask.Models;
 using TestTask.Services.Interfaces;
 
 namespace TestTask.Controllers
@@ -11,11 +13,11 @@ namespace TestTask.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private readonly IOrderService orderService;
+        private readonly IOrderService _orderService;
 
         public OrdersController(IOrderService orderService)
         {
-            this.orderService = orderService;
+            _orderService = orderService;
         }
 
         /// <summary>
@@ -24,10 +26,26 @@ namespace TestTask.Controllers
         /// </summary>
         [HttpGet]
         [Route("selected-order")]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> Get()
         {
-            var result = await this.orderService.GetOrder();
-            return this.Ok(result);
+            try
+            {
+                var order = await _orderService.GetOrderWithMaxTotalPrice();
+
+                return Ok(order);
+            }
+
+            catch (Exception ex)
+            {
+                return ex switch
+                {
+                    OrderNotFoundException e => NotFound(),
+
+                    _ => StatusCode(500),
+                };
+            }
         }
 
         /// <summary>
@@ -36,10 +54,26 @@ namespace TestTask.Controllers
         /// </summary>
         [HttpGet]
         [Route("selected-orders")]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> GetOrders()
         {
-            var result = await this.orderService.GetOrders();
-            return this.Ok(result);
+            try
+            {
+                var order = await _orderService.GetOrders();
+
+                return Ok(order);
+            }
+
+            catch (Exception ex)
+            {
+                return ex switch
+                {
+                    OrderNotFoundException e => NotFound(),
+
+                    _ => StatusCode(500),
+                };
+            }
         }
     }
 }

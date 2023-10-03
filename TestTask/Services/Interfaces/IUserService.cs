@@ -4,8 +4,9 @@ namespace TestTask.Services.Interfaces
 {
     public interface IUserService
     {
-        public Task<UserDTO> GetUser();
+        //Renamed methods according requirements, because it didnt show the main idea of the methods
+        public Task<UserDTO> GetUserWithMaxOrderCount();
 
-        public Task<List<UserDTO>> GetUsers();
+        public Task<List<UserDTO>> GetInactiveUsers();
     }
 }

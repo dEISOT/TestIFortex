@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Serilog;
+using TestTask.Exceptions;
+using TestTask.Models;
 using TestTask.Models.DTO;
 using TestTask.Repositories.Interfaces;
 using TestTask.Services.Interfaces;
@@ -15,22 +18,31 @@ namespace TestTask.Services
             _userRepository = userRepository;
             _mapper = mapper;
         }
-
-
-
+        //Renamed methods according requirements, because it didnt show the main idea of the methods
         //Get user with the biggest amount of orders
-        public async Task<UserDTO> GetUser()
+        public async Task<UserDTO> GetUserWithMaxOrderCount()
         {
-            var user = await _userRepository.GetUser();
-            var result = _mapper.Map<UserDTO>(user);
-            return result;
+            var user = _mapper.Map<UserDTO>(await _userRepository.GetUserWithMaxOrderCount());
+            if (user == null)
+            {
+                Log.Information($"user with order id {user.Id} not found");
+
+                throw new OrderNotFoundException();
+            };
+            return user;
 
         }
         //Get users with the status Inactive
-        public async Task<List<UserDTO>> GetUsers()
+        public async Task<List<UserDTO>> GetInactiveUsers()
         {
-            var users = await _userRepository.GetUsers();
-            return _mapper.Map<List<UserDTO>>(users);
+            var users = _mapper.Map<List<UserDTO>>( await _userRepository.GetInactiveUsers());
+            if (users == null)
+            {
+                Log.Information($"users not found");
+
+                throw new OrderNotFoundException();
+            }
+            return users;
         }
     }
 }

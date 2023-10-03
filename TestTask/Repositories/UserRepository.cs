@@ -13,13 +13,13 @@ namespace TestTask.Repositories
         {
             _context = context;
         }
-
-        public async Task<User> GetUser()
+        //Renamed methods according requirements, because it didnt show the main idea of the methods
+        public async Task<User> GetUserWithMaxOrderCount()
         {
             return await _context.Users.OrderByDescending(u => u.Orders.Count()).FirstOrDefaultAsync();
         }
 
-        public async Task<List<User>> GetUsers()
+        public async Task<List<User>> GetInactiveUsers()
         {
             return await _context.Users.Where(u => u.Status == Enums.UserStatus.Inactive).ToListAsync();
         }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\TestTask\\TestTask\\TestTask.csproj": {}
+    "D:\\Programming\\TestIFortex\\TestTask\\TestTask.csproj": {}
   },
   "projects": {
-    "D:\\TestTask\\TestTask\\TestTask.csproj": {
+    "D:\\Programming\\TestIFortex\\TestTask\\TestTask.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TestTask\\TestTask\\TestTask.csproj",
+        "projectUniqueName": "D:\\Programming\\TestIFortex\\TestTask\\TestTask.csproj",
         "projectName": "TestTask",
-        "projectPath": "D:\\TestTask\\TestTask\\TestTask.csproj",
-        "packagesPath": "C:\\Users\\Администратор\\.nuget\\packages\\",
-        "outputPath": "D:\\TestTask\\TestTask\\obj\\",
+        "projectPath": "D:\\Programming\\TestIFortex\\TestTask\\TestTask.csproj",
+        "packagesPath": "C:\\Users\\edani\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming\\TestIFortex\\TestTask\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Администратор\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\edani\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[7.0.11, )"
             },
+            "Serilog": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -69,7 +73,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -81,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

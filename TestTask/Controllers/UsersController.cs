@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TestTask.Exceptions;
+using TestTask.Services;
 using TestTask.Services.Interfaces;
 
 namespace TestTask.Controllers
@@ -11,11 +13,11 @@ namespace TestTask.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService userService;
+        private readonly IUserService _userService;
 
         public UsersController(IUserService userService)
         {
-            this.userService = userService;
+            _userService = userService;
         }
 
         /// <summary>
@@ -24,10 +26,26 @@ namespace TestTask.Controllers
         /// </summary>
         [HttpGet]
         [Route("selected-user")]
-        public async Task<IActionResult> Get()
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetUserWithMaxOrderCount()
         {
-            var result = await this.userService.GetUser();
-            return this.Ok(result);
+            try
+            {
+                var user = await _userService.GetUserWithMaxOrderCount();
+
+                return Ok(user);
+            }
+
+            catch (Exception ex)
+            {
+                return ex switch
+                {
+                    OrderNotFoundException e => NotFound(),
+
+                    _ => StatusCode(500),
+                };
+            }
         }
 
         /// <summary>
@@ -36,10 +54,26 @@ namespace TestTask.Controllers
         /// </summary>
         [HttpGet]
         [Route("selected-users")]
-        public async Task<IActionResult> GetUsers()
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetInactiveUsers()
         {
-            var result = await this.userService.GetUsers();
-            return this.Ok(result);
+            try
+            {
+                var users = await _userService.GetInactiveUsers();
+
+                return Ok(users);
+            }
+
+            catch (Exception ex)
+            {
+                return ex switch
+                {
+                    OrderNotFoundException e => NotFound(),
+
+                    _ => StatusCode(500),
+                };
+            }
         }
     }
 }

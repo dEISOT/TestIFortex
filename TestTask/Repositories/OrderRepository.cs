@@ -9,8 +9,16 @@ namespace TestTask.Repositories
     {
         private readonly ApplicationDbContext _context;
 
-        public async Task<Order> GetOrder()
+        public OrderRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        //INFO: Better to add field total price in Order model. It will optimize get request
+        //Renamed methods according requirements, because it didnt show the main idea of the methods
+        public async Task<Order> GetOrderWithMaxTotalPrice()
         { 
+            //return await _context.Orders.OrderByDescending(order => order.Price * order.Quantity).FirstOrDefaultAsync();
             return await _context.Orders.OrderByDescending(order => order.Price * order.Quantity).FirstOrDefaultAsync();
         }
 

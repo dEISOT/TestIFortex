@@ -4,7 +4,8 @@ namespace TestTask.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        public Task<User> GetUser();
-        public Task<List<User>> GetUsers();
+        //Renamed methods according requirements, because it didnt show the main idea of the methods
+        public Task<User> GetUserWithMaxOrderCount();
+        public Task<List<User>> GetInactiveUsers();
     }
 }

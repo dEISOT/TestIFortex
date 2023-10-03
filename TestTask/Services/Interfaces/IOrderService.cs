@@ -4,7 +4,8 @@ namespace TestTask.Services.Interfaces
 {
     public interface IOrderService
     {
-        public Task<OrderDTO> GetOrder();
+        //Renamed methods according requirements, because it didnt show the main idea of the methods
+        public Task<OrderDTO> GetOrderWithMaxTotalPrice();
 
         public Task<List<OrderDTO>> GetOrders();
     }
