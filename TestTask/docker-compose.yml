@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+     SqlServerDb:
+        image: mcr.microsoft.com/mssql/server:2017-latest
+        volumes:
+           - events_mssql:/var/opt/mssql
+        ports:
+           - 1433:1433
+        environment:
+           - ACCEPT_EULA=1
+           - MSSQL_SA_PASSWORD=r00t.R00T
+     
+     api:
+        container_name: TestTaskWebApi
+        image: ${DOCKER_REGISTRY-}webapisqlserverdockerdemo
+        ports:
+            - "5276:80"
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - SqlServerDb
+
+volumes:
+     events_mssql:
+

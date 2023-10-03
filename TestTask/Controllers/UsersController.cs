@@ -53,7 +53,7 @@ namespace TestTask.Controllers
         /// Selection rules are specified in Task description provided by recruiter
         /// </summary>
         [HttpGet]
-        [Route("selected-users")]
+        [Route(" ")]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetInactiveUsers()

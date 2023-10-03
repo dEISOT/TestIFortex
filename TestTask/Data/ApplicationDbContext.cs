@@ -12,8 +12,8 @@ namespace TestTask.Data
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
         }
         //changed id from int to guid 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
